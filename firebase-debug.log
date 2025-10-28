@@ -1,0 +1,52 @@
+[debug] [2025-07-18T12:41:30.230Z] ----------------------------------------------------------------------
+[debug] [2025-07-18T12:41:30.236Z] Command:       /nix/store/rbdrkcs5kkwpalxcd7c6bnm33lk2955n-nodejs-20.19.0/bin/node /nix/store/fprgfkwna33crhc86jqbf5878piivvgw-firebase-tools-14.7.0/lib/node_modules/firebase-tools/lib/bin/firebase.js init
+[debug] [2025-07-18T12:41:30.237Z] CLI Version:   14.7.0
+[debug] [2025-07-18T12:41:30.238Z] Platform:      linux
+[debug] [2025-07-18T12:41:30.238Z] Node Version:  v20.19.0
+[debug] [2025-07-18T12:41:30.238Z] Time:          Fri Jul 18 2025 12:41:30 GMT+0000 (Coordinated Universal Time)
+[debug] [2025-07-18T12:41:30.239Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-18T12:41:30.244Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2025-07-18T12:41:30.334Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-18T12:41:30.630Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2025-07-18T12:41:30.635Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2025-07-18T12:42:53.562Z] Running auto auth
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /home/user/permitwisev2
+
+[debug] [2025-07-18T12:54:24.452Z] ----------------------------------------------------------------------
+[debug] [2025-07-18T12:54:24.457Z] Command:       /nix/store/rbdrkcs5kkwpalxcd7c6bnm33lk2955n-nodejs-20.19.0/bin/node /nix/store/fprgfkwna33crhc86jqbf5878piivvgw-firebase-tools-14.7.0/lib/node_modules/firebase-tools/lib/bin/firebase.js init
+[debug] [2025-07-18T12:54:24.458Z] CLI Version:   14.7.0
+[debug] [2025-07-18T12:54:24.458Z] Platform:      linux
+[debug] [2025-07-18T12:54:24.459Z] Node Version:  v20.19.0
+[debug] [2025-07-18T12:54:24.459Z] Time:          Fri Jul 18 2025 12:54:24 GMT+0000 (Coordinated Universal Time)
+[debug] [2025-07-18T12:54:24.459Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-18T12:54:24.476Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-18T12:54:24.477Z] > authorizing via signed-in user (itmsiza1994@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /home/user/permitwisev2
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
