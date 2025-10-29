@@ -1,7 +1,7 @@
 // src/app/api/applications/update-status/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, db } from '@/lib/firebaseAdmin'; // Assuming Admin SDK instances
-import { doc, updateDoc } from 'firebase-admin/firestore';
+//import { doc, updateDoc } from 'firebase-admin/firestore';
 
 export async function POST(req: NextRequest) {
   try {
@@ -40,10 +40,11 @@ export async function POST(req: NextRequest) {
     }
 
     // 3. Update Application Status in Firestore
-    const applicationRef = doc(db, "applications", applicationId);
+    const applicationRef = db.collection('applications').doc(applicationId);
 
     try {
-      await updateDoc(applicationRef, { status: newStatus });
+      await applicationRef.update({ status: newStatus });
+      
       console.log(`Application ${applicationId} status updated to ${newStatus}`);
 
       // 4. Trigger Dashboard Update (Conceptual - using a custom event for simplicity)
