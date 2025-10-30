@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3000", 
+    "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start -p 3000",
     "lint": "next lint",
@@ -42,6 +42,7 @@
     "firebase": "^11.10.0",
     "firebase-admin": "^13.4.0",
     "formidable": "^3.5.4",
+    "get-stream": "^9.0.1",
     "lucide-react": "^0.475.0",
     "next": "15.2.3",
     "patch-package": "^8.0.0",
@@ -64,4 +65,3 @@
     "typescript": "^5"
   }
 }
-
