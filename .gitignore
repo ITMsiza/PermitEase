@@ -7,10 +7,10 @@ node_modules/
 .next/
 
 # Dashboard
-src/app/(app)/dashboard/
+#src/app/(app)/dashboard/
 
 # Components
-src/components/
+#src/components/
 
 # env files
 .env.local
