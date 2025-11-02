@@ -95,7 +95,6 @@ export default function ApplicationsDocsPage() {
   
   const handleApplicationSelect = (id: string) => {
     router.push(`/applications/review?applicationId=${id}`);
-    //router.push(`/applications/docs?applicationId=${id}`);
   };
 
   const breadcrumbItems = [
