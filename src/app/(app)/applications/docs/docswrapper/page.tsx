@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import ApplicationsDocsPage from '../page';
+import ApplicationsDocsPage from '../ApplicationsDocsPage';
 
 export default function Page() {
   return (
@@ -8,4 +8,3 @@ export default function Page() {
     </Suspense>
   );
 }
- 
