@@ -1,7 +1,10 @@
-import { cert, getApps, initializeApp } from "firebase-admin/app";
+/*import { cert, getApps, initializeApp } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
 import { getAuth } from "firebase-admin/auth";
 
+if (!process.env.FIREBASE_SERVICE_ACCOUNT) {
+  console.error(" FIREBASE_SERVICE_ACCOUNT is missing!");
+}
 
 if (!getApps().length) {
   const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT!);
@@ -12,12 +15,12 @@ if (!getApps().length) {
 }
 
 export const db = getFirestore();
-export const adminAuth = getAuth();
+export const adminAuth = getAuth();*/
 
 
-/*import { cert, getApps, initializeApp } from 'firebase-admin/app';
+import { cert, getApps, initializeApp } from 'firebase-admin/app';
 import { getFirestore } from "firebase-admin/firestore";
-import { getAuth } from "firebase-admin/auth"; // Import getAuth
+import { getAuth } from "firebase-admin/auth";
 
 
 if (!getApps().length) {
@@ -32,4 +35,4 @@ if (!getApps().length) {
 
 
 export const db = getFirestore();
-export const adminAuth = getAuth(); // Export adminAuth*/
+export const adminAuth = getAuth();
