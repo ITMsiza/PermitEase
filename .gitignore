@@ -15,8 +15,8 @@ node_modules/
 # env files
 .env.local
 
-#permitease
-permitease-d3fd4-firebase-adminsdk-*.json
+# service account
+service-account.json
 
 
 

@@ -1,4 +1,18 @@
-import { cert, getApps, initializeApp } from 'firebase-admin/app';
+import { cert, getApps, initializeApp, ServiceAccount } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
+import { getAuth } from "firebase-admin/auth";
+import serviceAccount from "../../service-account.json";
+
+if (!getApps().length) {
+  initializeApp({
+    credential: cert(serviceAccount as ServiceAccount), 
+  });
+}
+
+export const db = getFirestore();
+export const adminAuth = getAuth();
+
+/*import { cert, getApps, initializeApp } from 'firebase-admin/app';
 import { getFirestore } from "firebase-admin/firestore";
 import { getAuth } from "firebase-admin/auth"; // Import getAuth
 
@@ -15,4 +29,4 @@ if (!getApps().length) {
 
 
 export const db = getFirestore();
-export const adminAuth = getAuth(); // Export adminAuth
+export const adminAuth = getAuth(); // Export adminAuth*/
