@@ -62,6 +62,7 @@ export default function ApplicationsDocsPage() {
       }
     };
     fetchPendingApplications(); // Fetch only pending applications
+    fetchApplications();
   }, []); // Fetch applications only once on component mount
   //--------------------------------
   
