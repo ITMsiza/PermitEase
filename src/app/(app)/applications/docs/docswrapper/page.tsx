@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import AppDocsPage from '../page';
+import AppDocsPage from '../ApplicationsDocsPage';
 
 export default function Page() {
   return (
