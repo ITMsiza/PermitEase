@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import {db} from "@/lib/firebaseAdmin";
 
-// 🔹 Map full province names to abbreviations
+//  Map full province names to abbreviations
 const provinceMap: Record<string, string> = {
   "Gauteng": "GP",
   "Western Cape": "WC",
@@ -14,14 +14,14 @@ const provinceMap: Record<string, string> = {
   "Northern Cape": "NC",
 };
 
-// 🔹 Type for status counts
+//  Type for status counts
 type StatusCounts = {
   approved: number;
   pending: number;
   rejected: number;
 };
 
-// 🔹 Type for final API response
+//  Type for final API response
 type ProvinceStatus = {
   province: string;
   approved: number;
@@ -33,13 +33,13 @@ export async function GET() {
   try {
     const snapshot = await db.collection("applications").get();
 
-    // 🔹 Initialize result structure with 0 counts
+    //  Initialize result structure with 0 counts
     const counts: Record<string, StatusCounts> = {};
     Object.values(provinceMap).forEach((abbr) => {
       counts[abbr] = { approved: 0, pending: 0, rejected: 0 };
     });
 
-    // 🔹 Count statuses
+    //  Count statuses
     snapshot.forEach((doc) => {
       const data = doc.data() as { province?: string; status?: string };
 
@@ -56,7 +56,7 @@ export async function GET() {
       if (status === "rejected") counts[provinceAbbr].rejected += 1;
     });
 
-    // 🔹 Convert to array format
+    //  Convert to array format
     const provincialApplicationStatusData: ProvinceStatus[] = Object.entries(counts).map(
       ([province, { approved, pending, rejected }]) => ({
         province,

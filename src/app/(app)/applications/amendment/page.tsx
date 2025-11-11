@@ -30,13 +30,6 @@ export default function AmendmentPage() {
     router.push('/dashboard');
   };
 
-  /*const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    // Handle submission logic here
-    console.log({ amendmentType, justification });
-  };*/
-
-  //----------
   // Add a function to handle form submission
 const handleSubmitAmendment = async (e: React.FormEvent) => {
   e.preventDefault(); // Prevent default form submission
@@ -47,23 +40,19 @@ const handleSubmitAmendment = async (e: React.FormEvent) => {
       return;
   }
 
-  // You'll need the applicationId here. Where does it come from?
-  // It might be passed as a URL parameter, or fetched based on the current context.
-  const applicationId = "PW-7971-15"; // Replace with actual logic to get the ID
+  const applicationId = "PW-7971-15"; // ID
 
   try {
       const response = await fetch('/api/submit-amendment', { // Call your new API route
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
-              // Include authorization if needed
           },
           body: JSON.stringify({
               applicationId: applicationId,
               amendmentType: amendmentType,
               justification: justification,
-              // Include any other data relevant to the specific amendment type
-              // e.g., newAddress: addressState
+          
           }),
       });
 
@@ -75,26 +64,10 @@ const handleSubmitAmendment = async (e: React.FormEvent) => {
       const result = await response.json();
       console.log("Amendment submission successful:", result);
 
-      // Show a success message to the user (similar to your review page toast)
-      // toast({
-      //     title: "Success",
-      //     description: "Amendment submitted successfully.",
-      // });
-
-      // Optionally, redirect the user after successful submission
-      // router.push(`/applications/${applicationId}`); // Or wherever appropriate
-
   } catch (error: any) {
       console.error("Error submitting amendment:", error);
-      // Show an error message to the user
-      // toast({
-      //     title: "Error",
-      //     description: error.message || "An error occurred while submitting the amendment.",
-      //     variant: "destructive",
-      // });
   }
 };
-  //-----------
 
   const breadcrumbItems = [
     { label: 'Permits', href: '/applications' },

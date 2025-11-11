@@ -6,8 +6,8 @@ node_modules/
 # next.js
 .next/
 
-# Dashboard
-#src/app/(app)/dashboard/
+# Layout
+src/components/layout/
 
 # Components
 #src/components/

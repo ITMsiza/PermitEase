@@ -1,4 +1,3 @@
-// src/app/api/dashboard/kpis/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/firebaseAdmin'; // Admin SDK Firestore instance
 import { Timestamp } from 'firebase-admin/firestore';
@@ -11,14 +10,6 @@ export async function GET(req: NextRequest) {
     let startDate = new Date(0); // Default to start of epoch (all time)
     const endDate = new Date(); // Default end date is now
 
-    /*if (timeFilter === 'weekly') {
-      // Set startDate to the beginning of 7 days ago
-      startDate = new Date(endDate);
-      startDate.setDate(endDate.getDate() - 6); // Count the current day as well
-    } else if (timeFilter === 'monthly') {
-      startDate = new Date(endDate);
-      startDate.setMonth(endDate.getMonth() - 1);
-    }*/
       if (timeFilter === 'weekly') {
         startDate = new Date(endDate);
         startDate.setDate(endDate.getDate() - 7);

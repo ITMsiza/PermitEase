@@ -1,5 +1,3 @@
-// src/app/(app)/applications/docspdf/page.tsx
-
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -9,11 +7,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "@/hooks/use-toast"; // Assuming this is the correct import
 
-// Define a type for your application data (optional but recommended)
+// Define a type for your application data 
 interface Application {
-    id: string; // Assuming you have a unique ID
-    applicationIdDisplay: string; // The ID you want to display and use for fetching specific data
-    // Add other properties of your application data as needed
+    id: string; // unique ID
+    applicationIdDisplay: string; // The ID to display and use for fetching specific data
     [key: string]: any; // Allow for other arbitrary properties
 }
 
@@ -229,9 +226,6 @@ export default function DocsPdfPage() {
                         </div>
                     </CardContent>
                 </Card>
-
-                {/* Keep the combined PDF section if still needed */}
-                {/* ... (Combined PDF card) ... */}
 
             </div>
         </ScrollArea>

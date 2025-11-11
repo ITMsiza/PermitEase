@@ -24,7 +24,7 @@ export default function AnalyticsPage() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center">
-            <Icons.barChart3 className="mr-2 h-5 w-5" /> {/* Changed Icon */}
+            <Icons.barChart3 className="mr-2 h-5 w-5" /> 
             Analytics Center
           </CardTitle>
         </CardHeader>

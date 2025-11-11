@@ -1,4 +1,4 @@
-'use client'; // This is important if you are using client-side hooks or interactivity
+'use client';
 
 import { Breadcrumb } from "@/components/breadcrumb";
 import { PageHeader } from "@/components/page-header";
@@ -16,14 +16,13 @@ type PermitDetails = {
     status: string;
     expiryDate: string;
     renewalFee: string;
-    // Add other relevant permit details fields here
   };
 
 export default function PermitRenewalPage() {
   const [permitId, setPermitId] = useState('');
-  const [permitDetails, setPermitDetails] = useState<PermitDetails | null>(null); // Updated the type here
+  const [permitDetails, setPermitDetails] = useState<PermitDetails | null>(null); 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null); // Updated the type here
+  const [error, setError] = useState<string | null>(null); 
 
   const handleSearch = async () => {
     if (!permitId) {
@@ -37,18 +36,6 @@ export default function PermitRenewalPage() {
     setPermitDetails(null); // Clear previous details
 
     try {
-      // TODO: Implement logic to fetch permit details based on permitId
-      // This will likely involve calling a backend API or directly querying your database
-      // Example:
-      // const response = await fetch(`/api/permits/${permitId}`);
-      // if (!response.ok) {
-      //   throw new Error('Permit not found or error fetching details.');
-      // }
-      // const data = await response.json();
-      // setPermitDetails(data);
-
-      // Placeholder for demonstration:
-      // Simulate fetching data
       await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
       const dummyDetails = {
         id: permitId,
@@ -57,7 +44,7 @@ export default function PermitRenewalPage() {
         status: "Expiring",
         expiryDate: "31 Dec 2023",
         renewalFee: "R 1, 600.00 ZAR", // Example fee
-        // Add other relevant permit details
+        
       };
       setPermitDetails(dummyDetails);
 
@@ -79,27 +66,6 @@ export default function PermitRenewalPage() {
     setError(null);
 
     try {
-      // TODO: Implement logic to process the permit renewal
-      // This will likely involve:
-      // 1. Validating renewal requirements
-      // 2. Processing payment (if applicable)
-      // 3. Updating the permit status and expiry date in the database
-      // 4. Potentially generating a new permit document
-
-      // Example:
-      // const response = await fetch(`/api/permits/${permitDetails.id}/renew`, {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ /* renewal data */ })
-      // });
-      // if (!response.ok) {
-      //   throw new Error('Error processing renewal.');
-      // }
-      // const result = await response.json();
-      // Handle successful renewal (e.g., show success message, update UI)
-      // console.log("Renewal successful:", result);
-
-      // Placeholder for demonstration:
       await new Promise(resolve => setTimeout(resolve, 1000));
       alert(`Permit ${permitDetails.id} renewed successfully (simulated)!`);
       setPermitDetails(null); // Clear details after renewal
@@ -154,8 +120,7 @@ export default function PermitRenewalPage() {
               <p><strong>Vehicle Type:</strong> {permitDetails.vehicleType}</p>
               <p><strong>Status:</strong> {permitDetails.status}</p>
               <p><strong>Expiry Date:</strong> {permitDetails.expiryDate}</p>
-              {/* Display other relevant details */}
-
+             
               {/* Example of conditional rendering for renewal button */}
               {permitDetails.status !== 'Approved' && permitDetails.status !== 'Rejected' && ( // Add conditions for when renewal is allowed
                  <div className="pt-4">

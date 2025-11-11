@@ -16,7 +16,7 @@ import {
   SidebarMenuSubItem,
   SidebarMenuSubButton,
   SidebarSeparator,
-  useSidebar, 
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/icons";
@@ -49,11 +49,11 @@ const applicationsAndLicencesItems: MenuItemType[] = [
     icon: Icons.applications, // Assuming Icons.applications is suitable for Permits
     isToggle: true,
     subItems: [
-       { href: "/applications/new?applicationType=New", label: "New", icon: Icons.plusCircle },
-       { href: "/applications/amendment", label: "Amendment", icon: Icons.edit },
-       { href: "/applications/renewal", label: "Renewal", icon: Icons.repeat },
-       { href: "/applications/new?applicationType=Transfer", label: "Transfer", icon: Icons.arrowRightLeft },
-       { href: "/applications/new?applicationType=Conversion", label: "Conversion", icon: Icons.refreshCw },
+      { href: "/applications/new?applicationType=New", label: "New", icon: Icons.plusCircle },
+      { href: "/applications/amendment", label: "Amendment", icon: Icons.edit },
+      { href: "/applications/renewal", label: "Renewal", icon: Icons.repeat },
+      { href: "/applications/new?applicationType=Transfer", label: "Transfer", icon: Icons.arrowRightLeft },
+      { href: "/applications/new?applicationType=Conversion", label: "Conversion", icon: Icons.refreshCw },
     ],
   },
   {
@@ -65,8 +65,8 @@ const applicationsAndLicencesItems: MenuItemType[] = [
       { href: "/licences/active", label: "Active", icon: Icons.approveApplication },
       { href: "/licences/in-progress", label: "In Progress", icon: Icons.loader },
       { href: "/licences/suspended", label: "Suspended", icon: Icons.rejectApplication },
-      { href: "/licences/renewal", label: "Renewal", icon: Icons.repeat }, 
-      { href: "/licences/conversion", label: "Conversion", icon: Icons.refreshCw }, 
+      { href: "/licences/renewal", label: "Renewal", icon: Icons.repeat },
+      { href: "/licences/conversion", label: "Conversion", icon: Icons.refreshCw },
     ],
   },
 ];
@@ -93,7 +93,7 @@ const logoutItem: MenuItemType[] = [
 
 export function AppSidebar() {
   const pathname = usePathname();
-  const searchParams = usePathname(); 
+  const searchParams = usePathname();
   const [openSubMenus, setOpenSubMenus] = useState<Record<string, boolean>>({});
   const { toggleSidebar, state: sidebarState, isMobile } = useSidebar();
 
@@ -106,21 +106,21 @@ export function AppSidebar() {
       if (item.subItems && item.isToggle) {
         const isSubMenuKey = item.label.toLowerCase().replace(/\s+/g, '-');
         const isAnySubItemActive = item.subItems.some(subItem => {
-            const subItemBasePath = subItem.href.split('?')[0];
-            const currentBasePath = pathname.split('?')[0];
-            if (currentBasePath === subItemBasePath) {
-                 const subItemQuery = new URLSearchParams(subItem.href.split('?')[1] || '');
-                 const currentQuery = new URLSearchParams(searchParams.split('?')[1] || ''); 
-                 
-                 let match = true;
-                 subItemQuery.forEach((value, key) => {
-                    if (currentQuery.get(key) !== value) {
-                        match = false;
-                    }
-                 });
-                 return match;
-            }
-            return false;
+          const subItemBasePath = subItem.href.split('?')[0];
+          const currentBasePath = pathname.split('?')[0];
+          if (currentBasePath === subItemBasePath) {
+            const subItemQuery = new URLSearchParams(subItem.href.split('?')[1] || '');
+            const currentQuery = new URLSearchParams(searchParams.split('?')[1] || '');
+
+            let match = true;
+            subItemQuery.forEach((value, key) => {
+              if (currentQuery.get(key) !== value) {
+                match = false;
+              }
+            });
+            return match;
+          }
+          return false;
         });
       }
     });
@@ -132,10 +132,10 @@ export function AppSidebar() {
     const isSubMenuOpen = openSubMenus[isSubMenuKey] || false;
 
     let isParentActive = pathname === item.href.split('?')[0] || (item.href !== "/" && pathname.startsWith(item.href.split('?')[0] + "/"));
-    
+
     if (item.subItems && item.subItems.some(subItem => {
-        const subItemBasePath = subItem.href.split('?')[0];
-        return pathname.startsWith(subItemBasePath) && subItem.href === pathname + (searchParams.toString() ? '?' + searchParams.toString() : '');
+      const subItemBasePath = subItem.href.split('?')[0];
+      return pathname.startsWith(subItemBasePath) && subItem.href === pathname + (searchParams.toString() ? '?' + searchParams.toString() : '');
     })) {
     }
 
@@ -145,7 +145,7 @@ export function AppSidebar() {
         <div className="flex items-center w-full">
           <Link
             href={item.href}
-            legacyBehavior={item.subItems && item.isToggle ? true : undefined} 
+            legacyBehavior={item.subItems && item.isToggle ? true : undefined}
             passHref={item.subItems && item.isToggle ? true : undefined}
           >
             <SidebarMenuButton
@@ -174,9 +174,8 @@ export function AppSidebar() {
               aria-expanded={isSubMenuOpen}
             >
               <Icons.chevronSmallDown
-                className={`h-4 w-4 text-sidebar-foreground transition-transform duration-200 ${
-                  isSubMenuOpen ? "rotate-180" : ""
-                }`}
+                className={`h-4 w-4 text-sidebar-foreground transition-transform duration-200 ${isSubMenuOpen ? "rotate-180" : ""
+                  }`}
               />
             </button>
           )}
@@ -187,7 +186,7 @@ export function AppSidebar() {
               const SubIconComponent = subItem.icon;
               const subItemBasePath = subItem.href.split('?')[0];
               const subItemQueryString = subItem.href.split('?')[1] || '';
-              
+
               const currentQueryString = searchParams.split('?')[1] || '';
               const isActive = pathname === subItemBasePath && subItemQueryString === currentQueryString;
 
@@ -254,11 +253,9 @@ export function AppSidebar() {
 
         {/* Mobile state (Sheet view) */}
         {isMobile && (
-           <Link href="/dashboard" className="flex items-center gap-2 flex-grow">
-              <Logo className="h-8 w-auto" />
-            </Link>
-          // The Sheet (mobile sidebar) has its own close (X) button by default.
-          // It's opened by the SidebarTrigger in AppHeader.
+          <Link href="/dashboard" className="flex items-center gap-2 flex-grow">
+            <Logo className="h-8 w-auto" />
+          </Link>
         )}
       </SidebarHeader>
       <SidebarContent className="flex-1 p-2">
@@ -280,13 +277,13 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarSeparator className="my-2" />
       <SidebarFooter className="p-2">
-         <SidebarMenu>
-            {adminSettingsItems.map(item => renderMenuItem(item))}
-          </SidebarMenu>
-          <SidebarSeparator className="my-2" />
-         <SidebarMenu>
-            {logoutItem.map(item => renderMenuItem(item))}
-          </SidebarMenu>
+        <SidebarMenu>
+          {adminSettingsItems.map(item => renderMenuItem(item))}
+        </SidebarMenu>
+        <SidebarSeparator className="my-2" />
+        <SidebarMenu>
+          {logoutItem.map(item => renderMenuItem(item))}
+        </SidebarMenu>
       </SidebarFooter>
     </Sidebar>
   );

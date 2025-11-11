@@ -43,26 +43,6 @@ import { BarChart, PieChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Pie, Cel
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast'; // Assuming useToast for error notifications
 
-//--------------------------------------------------------
-/*const initialKpiDataConfig = [
-  { id: "totalRevenue", title: "Total Revenue", initialValue: "R 5.2Mil", icon: Icons.handCoins, initialDescription: "+15% from last month", iconClassName: "text-[hsl(var(--chart-1))]", baseValue: 5200000 },
-  { id: "pendingApplications", title: "Pending Applications", initialValue: "45", icon: Icons.fileText, initialDescription: "+5 since yesterday", iconClassName: "text-[hsl(var(--chart-2))]", baseValue: 45 },
-  { id: "approvedPermits", title: "Approved Permits", initialValue: "128", icon: Icons.clipboardCheck, initialDescription: "Target: 200", iconClassName: "text-[hsl(var(--chart-3))]", baseValue: 128 },
-  { id: "rejectedApplications", title: "Rejected Applications", initialValue: "12", icon: Icons.file, initialDescription: "-2 from last week", iconClassName: "text-[hsl(var(--chart-4))]", baseValue: 12 },
-];*/
-
-/*const provincialApplicationStatusData = [
-  { province: "GP", approved: 60, pending: 20, rejected: 5 },
-  { province: "WC", approved: 45, pending: 15, rejected: 3 },
-  { province: "KZN", approved: 30, pending: 25, rejected: 8 },
-  { province: "EC", approved: 25, pending: 10, rejected: 2 },
-  { province: "LP", approved: 15, pending: 5, rejected: 1 },
-  { province: "MP", approved: 18, pending: 7, rejected: 2 },
-  { province: "NW", approved: 22, pending: 8, rejected: 3 },
-  { province: "FS", approved: 12, pending: 6, rejected: 1 },
-  { province: "NC", approved: 8, pending: 4, rejected: 1 },
-];*/
-
 const fullProvincialRevenueData = [
   { month: "Jan", GP: 70000, WC: 40000, KZN: 25000, EC: 18000, LP: 10000, MP: 12000, NW: 15000, FS: 9000, NC: 7000 },
   { month: "Feb", GP: 75000, WC: 45000, KZN: 30000, EC: 20000, LP: 12000, MP: 15000, NW: 17000, FS: 10000, NC: 8000 },
@@ -78,25 +58,7 @@ const fullProvincialRevenueData = [
   { month: "Dec", GP: 105000, WC: 68000, KZN: 47000, EC: 35000, LP: 22000, MP: 27000, NW: 29000, FS: 18000, NC: 14000 },
 ];
 
-
-/*const applicationTypeData = [
-  { name: "New Operating License",value: 25, fill: "var(--color-new)" },
-  { name: "Renewal of Operating License",value: 40, fill: "var(--color-renewal)" },
-  { name: "Transfer of Operating License", value: 15, fill: "var(--color-transfer)" },
-  { name: "Conversion of Permit", value: 20, fill: "var(--color-conversion)" },
-  { name: "Route Amendment", value: 101, fill: "var(--color-amendment)" },
-];*/
-
 type ApplicationStatus = "Pending" | "Approved" | "Rejected";
-
-
-/*const recentApplicationsData: RecentApplication[] = [
-  { id: 'APP-2025-001', applicantName: 'Johannes van der Merwe', vehicleType: 'Sedan', permitType: 'E-hailing', applicationSubType: 'New', status: 'Pending', amount: 1500.00 },
-  { id: 'APP-2025-002', applicantName: 'Thabo Mbeki', vehicleType: 'Minibus', permitType: 'Minibus', applicationSubType: 'Renewal', status: 'Approved', amount: 2200.00 },
-  { id: 'APP-2025-003', applicantName: 'Sarah Johnson', vehicleType: 'Shuttle', permitType: 'Shuttle', applicationSubType: 'Transfer', status: 'Rejected', amount: 3000.00 },
-  { id: 'APP-2025-004', applicantName: 'David Nkosi', vehicleType: 'Sedan', permitType: 'Tourism', applicationSubType: 'Conversion', status: 'Pending', amount: 1500.00 },
-  { id: 'APP-2025-005', applicantName: 'Lerato Moloi', vehicleType: 'Bus', permitType: 'School', applicationSubType: 'Route Amendment', status: 'Approved', amount: 2200.00 },
-];*/
 
 const chartConfig = {
   approved: { label: "Approved", color: "hsl(var(--status-approved))" },
@@ -107,10 +69,10 @@ const chartConfig = {
   KZN: { label: "KZN", color: "hsl(var(--chart-3))" },
   EC: { label: "EC", color: "hsl(var(--chart-4))" },
   LP: { label: "LP", color: "hsl(var(--chart-5))" },
-  MP: { label: "MP", color: "hsl(var(--chart-1))" }, 
-  NW: { label: "NW", color: "hsl(var(--chart-2))" }, 
-  FS: { label: "FS", color: "hsl(var(--chart-3))" }, 
-  NC: { label: "NC", color: "hsl(var(--chart-4))" }, 
+  MP: { label: "MP", color: "hsl(var(--chart-1))" },
+  NW: { label: "NW", color: "hsl(var(--chart-2))" },
+  FS: { label: "FS", color: "hsl(var(--chart-3))" },
+  NC: { label: "NC", color: "hsl(var(--chart-4))" },
   eHailers: { label: "E-hailiers", color: "hsl(var(--chart-1))" },
   minibusType: { label: "Minibus", color: "hsl(var(--chart-2))" },
   shuttleType: { label: "Shuttle", color: "hsl(var(--chart-3))" },
@@ -147,15 +109,15 @@ const timeFilterOptions = [
 ];
 
 const mockNotifications = [
-    { id: 1, text: "New application #APP-2025-006 from S. Dlamini needs review.", icon: Icons.bell, time: "2m ago", actionLabel: "Review", actionHref: "/applications/review?id=APP-2025-006" },
-    { id: 2, text: "Route for #APP-2025-001 (J. van der Merwe) flagged for congestion.", icon: Icons.route, time: "1h ago", actionLabel: "View", actionHref: "/applications/review?id=APP-2025-001&tab=G" },
-    { id: 3, text: "Payment received for #APP-2024-103.", icon: Icons.creditCard, time: "3h ago", actionLabel: "View", actionHref: "/payment-history?transactionId=PAY-2024-103" },
+  { id: 1, text: "New application #APP-2025-006 from S. Dlamini needs review.", icon: Icons.bell, time: "2m ago", actionLabel: "Review", actionHref: "/applications/review?id=APP-2025-006" },
+  { id: 2, text: "Route for #APP-2025-001 (J. van der Merwe) flagged for congestion.", icon: Icons.route, time: "1h ago", actionLabel: "View", actionHref: "/applications/review?id=APP-2025-001&tab=G" },
+  { id: 3, text: "Payment received for #APP-2024-103.", icon: Icons.creditCard, time: "3h ago", actionLabel: "View", actionHref: "/payment-history?transactionId=PAY-2024-103" },
 ];
 
 const mockSuggestedInsights = [
-    { text: "Consider reviewing processing times for Minibus applications, they are trending higher.", actionLabel: "Analyze with AI", actionType: "ai_analyze_minibus_processing_time" },
-    { text: "Weekend application submissions have increased by 10%.", actionLabel: "View Report", actionHref: "/analytics?type=weekend_submissions" }, 
-    { text: "High rejection rate in GP province, investigate common reasons.", actionLabel: "Investigate with AI", actionType: "ai_investigate_gp_rejections" },
+  { text: "Consider reviewing processing times for Minibus applications, they are trending higher.", actionLabel: "Analyze with AI", actionType: "ai_analyze_minibus_processing_time" },
+  { text: "Weekend application submissions have increased by 10%.", actionLabel: "View Report", actionHref: "/analytics?type=weekend_submissions" },
+  { text: "High rejection rate in GP province, investigate common reasons.", actionLabel: "Investigate with AI", actionType: "ai_investigate_gp_rejections" },
 ];
 
 // Define the structure of your KPI data
@@ -202,8 +164,6 @@ type ApplicationTypeData = {
   fill: string;
 };
 
-
-
 export default function DashboardPage() {
   const [greeting, setGreeting] = useState('');
   const [formattedDate, setFormattedDate] = useState('');
@@ -214,109 +174,61 @@ export default function DashboardPage() {
   const [isLoadingKpis, setIsLoadingKpis] = useState(true);
   const [recentApplications, setRecentApplications] = useState<RecentApplication[]>([]);
   const [isLoadingRecentApplications, setIsLoadingRecentApplications] = useState(true);
-  //-----
   const [provincialApplicationStatusData, setProvincialApplicationStatusData] = useState<ProvinceStatus[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  //-------
   const [applicationTypeData, setApplicationTypeData] = useState<ApplicationTypeData[]>([]);
 
 
   const { toast } = useToast(); // Get toast function
 
-  /*const [kpiData, setKpiData] = useState(
-    initialKpiDataConfig.map(kpi => ({
-      ...kpi,
-      value: kpi.initialValue,
-      description: kpi.initialDescription,
-      // You might add loading state per KPI
-      isLoading: true,
-    }))
-  );*/
-
-  //----------------------------------------------------------------
   useEffect(() => {
     const fetchKpiData = async () => {
-      
+
       try {
-      
-      // Fetch data from your backend API endpoint
-      const response = await fetch("/api/kpis"); // Assuming your API is at /api/kpis
-      if (!response.ok) {
-        throw new Error('Failed to fetch KPI data');
-      }
-      
-      const data: FetchedKpiData[] = await response.json(); // Assuming backend returns an array of KPI objects
-         
-      // Map the fetched data to your frontend KpiData structure
-      const updatedKpiData: KpiData[] = data.map(fetchedKpi => { 
-         // Find the corresponding initial config to get icon and className
-         const initialConfig = kpiData.find(config => config.id === fetchedKpi.id);
 
-         return {
-           id: fetchedKpi.id,
-           title: fetchedKpi.title,
-           value: String(fetchedKpi.value), // Ensure value is a string for display
-           description: fetchedKpi.description,
-           icon: initialConfig?.icon || Icons.file, // Use icon from initial config or a default
-           iconClassName: initialConfig?.iconClassName || '', // Use className from initial config
-           baseValue: fetchedKpi.baseValue,
-         };
-      });
-
-
-      setKpiData(updatedKpiData); // Update kpiData state with fetched data 
-
-    } catch (error) {
-      console.error("Error fetching KPI data:", error);
-      toast({
-        title: "Error",
-        description: "Failed to load dashboard data.",
-        variant: "destructive",
-      });
-      setKpiData([]); // Clear data or set to initial on error
-    } finally {
-      setIsLoadingKpis(false);
-    }
-      //-------------------
-      /*setIsLoadingKpis(true);
-      try {
-        // Example: Fetch data from a backend API endpoint
-        const response = await fetch('/api/kpis'); // Your backend API route
+        // Fetch data from your backend API endpoint
+        const response = await fetch("/api/kpis"); // Assuming your API is at /api/kpis
         if (!response.ok) {
           throw new Error('Failed to fetch KPI data');
         }
-        const data = await response.json(); // Assuming backend returns data in a specific format
 
-        // Update kpiData state with fetched data
-        setKpiData(prevKpiData =>//--------------This must be noted--------------
-          prevKpiData.map(kpi => {
-            const fetchedKpi = data.find((item: any) => item.id === kpi.id);
-            if (fetchedKpi) {
-              return {
-                ...kpi,
-                value: fetchedKpi.value, // Use fetched value
-                description: fetchedKpi.description, // Use fetched description
-                isLoading: false,
-              };
-            }
-            return { ...kpi, isLoading: false }; // Mark as not loading even if data not found
-          })
-        );
+        const data: FetchedKpiData[] = await response.json(); // Assuming backend returns an array of KPI objects
+
+        // Map the fetched data to your frontend KpiData structure
+        const updatedKpiData: KpiData[] = data.map(fetchedKpi => {
+          // Find the corresponding initial config to get icon and className
+          const initialConfig = kpiData.find(config => config.id === fetchedKpi.id);
+
+          return {
+            id: fetchedKpi.id,
+            title: fetchedKpi.title,
+            value: String(fetchedKpi.value), // Ensure value is a string for display
+            description: fetchedKpi.description,
+            icon: initialConfig?.icon || Icons.file, // Use icon from initial config or a default
+            iconClassName: initialConfig?.iconClassName || '', // Use className from initial config
+            baseValue: fetchedKpi.baseValue,
+          };
+        });
+
+
+        setKpiData(updatedKpiData); // Update kpiData state with fetched data 
 
       } catch (error) {
         console.error("Error fetching KPI data:", error);
-        // Handle error (e.g., show error message to user)
-        setKpiData(prevKpiData =>
-           prevKpiData.map(kpi => ({ ...kpi, isLoading: false })) // Stop loading on error
-         );
+        toast({
+          title: "Error",
+          description: "Failed to load dashboard data.",
+          variant: "destructive",
+        });
+        setKpiData([]); // Clear data or set to initial on error
       } finally {
         setIsLoadingKpis(false);
-      }*/
+      }
     };
 
     fetchKpiData();
-    
+
     // *** Add event listener for application submission ***
     window.addEventListener('applicationSubmitted', fetchKpiData);
 
@@ -325,8 +237,7 @@ export default function DashboardPage() {
       window.removeEventListener('applicationSubmitted', fetchKpiData);
     };
   }, []); // Fetch data when the component mounts or timeFilter changes
-  
-  //--------------------------
+
   useEffect(() => {
     // Fetch API once on mount
     const fetchApplicationTypeData = async () => {
@@ -349,7 +260,7 @@ export default function DashboardPage() {
 
     fetchApplicationTypeData();
   }, []); // empty dependency array → runs only once
-  //-----------------------------
+
   useEffect(() => {
     const fetchStatusData = async () => {
       try {
@@ -357,7 +268,7 @@ export default function DashboardPage() {
         if (!res.ok) throw new Error("Failed to fetch status data");
 
         const result = await res.json();
-        setProvincialApplicationStatusData(result.data); 
+        setProvincialApplicationStatusData(result.data);
       } catch (err: any) {
         setError(err.message);
       } finally {
@@ -367,95 +278,59 @@ export default function DashboardPage() {
 
     fetchStatusData();
   }, []); // runs once on mount
-  //----------------------------------------------------------------
 
   // Effect to fetch KPI data from the backend
   useEffect(() => {
     const fetchKpiData = async () => {
       setIsLoadingKpis(true);
-  
+
       try {
-      const queryParams = new URLSearchParams();
-      if (selectedTimeFilter && selectedTimeFilter !== 'all') { // Only add if a filter is selected and not 'all'
-        queryParams.append('timeFilter', selectedTimeFilter);
-      }
-      // Fetch data from your backend API endpoint
-      const response = await fetch(`/api/kpis?${queryParams.toString()}`); // Assuming your API is at /api/kpis
-      if (!response.ok) {
-        throw new Error('Failed to fetch KPI data');
-      }
-      
-      const data: FetchedKpiData[] = await response.json(); // Assuming backend returns an array of KPI objects
-         
-      // Map the fetched data to your frontend KpiData structure
-      const updatedKpiData: KpiData[] = data.map(fetchedKpi => { 
-         // Find the corresponding initial config to get icon and className
-         const initialConfig = kpiData.find(config => config.id === fetchedKpi.id);
-
-         return {
-           id: fetchedKpi.id,
-           title: fetchedKpi.title,
-           value: String(fetchedKpi.value), // Ensure value is a string for display
-           description: fetchedKpi.description,
-           icon: initialConfig?.icon || Icons.file, // Use icon from initial config or a default
-           iconClassName: initialConfig?.iconClassName || '', // Use className from initial config
-           baseValue: fetchedKpi.baseValue,
-         };
-      });
-
-
-      setKpiData(updatedKpiData); // Update kpiData state with fetched data 
-
-    } catch (error) {
-      console.error("Error fetching KPI data:", error);
-      toast({
-        title: "Error",
-        description: "Failed to load dashboard data.",
-        variant: "destructive",
-      });
-      setKpiData([]); // Clear data or set to initial on error
-    } finally {
-      setIsLoadingKpis(false);
-    }
-      //-------------------
-      /*setIsLoadingKpis(true);
-      try {
-        // Example: Fetch data from a backend API endpoint
-        const response = await fetch('/api/kpis'); // Your backend API route
+        const queryParams = new URLSearchParams();
+        if (selectedTimeFilter && selectedTimeFilter !== 'all') { // Only add if a filter is selected and not 'all'
+          queryParams.append('timeFilter', selectedTimeFilter);
+        }
+        // Fetch data from your backend API endpoint
+        const response = await fetch(`/api/kpis?${queryParams.toString()}`); // Assuming your API is at /api/kpis
         if (!response.ok) {
           throw new Error('Failed to fetch KPI data');
         }
-        const data = await response.json(); // Assuming backend returns data in a specific format
 
-        // Update kpiData state with fetched data
-        setKpiData(prevKpiData =>//--------------This must be noted--------------
-          prevKpiData.map(kpi => {
-            const fetchedKpi = data.find((item: any) => item.id === kpi.id);
-            if (fetchedKpi) {
-              return {
-                ...kpi,
-                value: fetchedKpi.value, // Use fetched value
-                description: fetchedKpi.description, // Use fetched description
-                isLoading: false,
-              };
-            }
-            return { ...kpi, isLoading: false }; // Mark as not loading even if data not found
-          })
-        );
+        const data: FetchedKpiData[] = await response.json(); // Assuming backend returns an array of KPI objects
+
+        // Map the fetched data to your frontend KpiData structure
+        const updatedKpiData: KpiData[] = data.map(fetchedKpi => {
+          // Find the corresponding initial config to get icon and className
+          const initialConfig = kpiData.find(config => config.id === fetchedKpi.id);
+
+          return {
+            id: fetchedKpi.id,
+            title: fetchedKpi.title,
+            value: String(fetchedKpi.value), // Ensure value is a string for display
+            description: fetchedKpi.description,
+            icon: initialConfig?.icon || Icons.file, // Use icon from initial config or a default
+            iconClassName: initialConfig?.iconClassName || '', // Use className from initial config
+            baseValue: fetchedKpi.baseValue,
+          };
+        });
+
+
+        setKpiData(updatedKpiData); // Update kpiData state with fetched data 
 
       } catch (error) {
         console.error("Error fetching KPI data:", error);
-        // Handle error (e.g., show error message to user)
-        setKpiData(prevKpiData =>
-           prevKpiData.map(kpi => ({ ...kpi, isLoading: false })) // Stop loading on error
-         );
+        toast({
+          title: "Error",
+          description: "Failed to load dashboard data.",
+          variant: "destructive",
+        });
+        setKpiData([]); // Clear data or set to initial on error
       } finally {
         setIsLoadingKpis(false);
-      }*/
+      }
     };
 
     fetchKpiData();
-    
+
     // *** Add event listener for application submission ***
     window.addEventListener('applicationSubmitted', fetchKpiData);
 
@@ -464,7 +339,6 @@ export default function DashboardPage() {
       window.removeEventListener('applicationSubmitted', fetchKpiData);
     };
   }, [selectedTimeFilter]); // Fetch data when the component mounts or timeFilter changes
-  //--------------------------
 
   // Effect to fetch recent applications from the backend
   useEffect(() => {
@@ -494,10 +368,6 @@ export default function DashboardPage() {
     fetchRecentApplications();
   }, [toast]); // Depend on toast to avoid lint warnings, though it's unlikely to change
 
-
-
-
-
   useEffect(() => {
     const now = new Date();
     const currentHour = now.getHours();
@@ -525,12 +395,11 @@ export default function DashboardPage() {
     const getRandomChange = (base: number, factor: number) => Math.floor(base * (1 + (Math.random() - 0.5) * factor));
     const formatChange = (change: number) => `${change >= 0 ? '+' : ''}${change}`;
 
-//--------------------------------------------------------------------------
     switch (selectedTimeFilter) {
       case "weekly":
         filteredRevenueData = fullProvincialRevenueData.slice(0, 1);
         revenueValue = getRandomChange(revenueValue, 0.02);
-        revenueDescription = `${formatChange(Math.round(((revenueValue / (kpiData.find(k => k.id === "totalRevenue")?.baseValue || revenueValue)) -1) * 100))}% from last week`;
+        revenueDescription = `${formatChange(Math.round(((revenueValue / (kpiData.find(k => k.id === "totalRevenue")?.baseValue || revenueValue)) - 1) * 100))}% from last week`;
         pendingApps = getRandomChange(pendingApps, 0.1);
         pendingDesc = `${formatChange(pendingApps - (kpiData.find(k => k.id === "pendingApplications")?.baseValue || 45))} since last week`;
         approvedPermits = getRandomChange(approvedPermits, 0.05);
@@ -541,7 +410,7 @@ export default function DashboardPage() {
       case "bi-weekly":
         filteredRevenueData = fullProvincialRevenueData.slice(0, 2);
         revenueValue = getRandomChange(revenueValue, 0.03);
-        revenueDescription = `${formatChange(Math.round(((revenueValue / (kpiData.find(k => k.id === "totalRevenue")?.baseValue || revenueValue)) -1) * 100))}% from last bi-week`;
+        revenueDescription = `${formatChange(Math.round(((revenueValue / (kpiData.find(k => k.id === "totalRevenue")?.baseValue || revenueValue)) - 1) * 100))}% from last bi-week`;
         pendingApps = getRandomChange(pendingApps, 0.15);
         pendingDesc = `${formatChange(pendingApps - (kpiData.find(k => k.id === "pendingApplications")?.baseValue || 45))} since last bi-week`;
         approvedPermits = getRandomChange(approvedPermits, 0.07);
@@ -552,7 +421,7 @@ export default function DashboardPage() {
       case "monthly":
         filteredRevenueData = fullProvincialRevenueData.slice(0, 6);
         revenueValue = getRandomChange(revenueValue, 0.15);
-        revenueDescription = `${formatChange(Math.round(((revenueValue / (kpiData.find(k => k.id === "totalRevenue")?.baseValue || revenueValue)) -1) * 100))}% from last month`;
+        revenueDescription = `${formatChange(Math.round(((revenueValue / (kpiData.find(k => k.id === "totalRevenue")?.baseValue || revenueValue)) - 1) * 100))}% from last month`;
         pendingApps = getRandomChange(pendingApps, 0.05);
         pendingDesc = `${formatChange(pendingApps - (kpiData.find(k => k.id === "pendingApplications")?.baseValue || 45))} since last month`;
         approvedPermits = getRandomChange(approvedPermits, 0.1);
@@ -563,7 +432,7 @@ export default function DashboardPage() {
       case "quarterly":
         filteredRevenueData = fullProvincialRevenueData.slice(0, 3);
         revenueValue = getRandomChange(revenueValue, 0.10);
-        revenueDescription = `${formatChange(Math.round(((revenueValue / (kpiData.find(k => k.id === "totalRevenue")?.baseValue || revenueValue)) -1) * 100))}% from last quarter`;
+        revenueDescription = `${formatChange(Math.round(((revenueValue / (kpiData.find(k => k.id === "totalRevenue")?.baseValue || revenueValue)) - 1) * 100))}% from last quarter`;
         pendingApps = getRandomChange(pendingApps, 0.2);
         pendingDesc = `${formatChange(pendingApps - (kpiData.find(k => k.id === "pendingApplications")?.baseValue || 45))} since last quarter`;
         approvedPermits = getRandomChange(approvedPermits, 0.15);
@@ -574,7 +443,7 @@ export default function DashboardPage() {
       case "6-monthly":
         filteredRevenueData = fullProvincialRevenueData.slice(0, 6);
         revenueValue = getRandomChange(revenueValue, 0.20);
-        revenueDescription = `${formatChange(Math.round(((revenueValue / (kpiData.find(k => k.id === "totalRevenue")?.baseValue || revenueValue)) -1) * 100))}% from last 6 months`;
+        revenueDescription = `${formatChange(Math.round(((revenueValue / (kpiData.find(k => k.id === "totalRevenue")?.baseValue || revenueValue)) - 1) * 100))}% from last 6 months`;
         pendingApps = getRandomChange(pendingApps, 0.25);
         pendingDesc = `${formatChange(pendingApps - (kpiData.find(k => k.id === "pendingApplications")?.baseValue || 45))} for last 6 months`;
         approvedPermits = getRandomChange(approvedPermits, 0.18);
@@ -586,7 +455,7 @@ export default function DashboardPage() {
       default:
         filteredRevenueData = fullProvincialRevenueData.slice(0, 12);
         revenueValue = getRandomChange(revenueValue, 0.25);
-        revenueDescription = `${formatChange(Math.round(((revenueValue / (kpiData.find(k => k.id === "totalRevenue")?.baseValue || revenueValue)) -1) * 100))}% from last year`;
+        revenueDescription = `${formatChange(Math.round(((revenueValue / (kpiData.find(k => k.id === "totalRevenue")?.baseValue || revenueValue)) - 1) * 100))}% from last year`;
         pendingApps = getRandomChange(pendingApps, 0.3);
         pendingDesc = `${formatChange(pendingApps - (kpiData.find(k => k.id === "pendingApplications")?.baseValue || 45))} from last year`;
         approvedPermits = getRandomChange(approvedPermits, 0.22);
@@ -598,13 +467,13 @@ export default function DashboardPage() {
     setCurrentProvincialRevenueData(filteredRevenueData);
 
     setKpiData(prevKpiData => prevKpiData.map(kpi => {
-        if (kpi.id === "totalRevenue") return { ...kpi, value: `R ${(revenueValue / 1000000).toFixed(1)}Mil`, description: revenueDescription };
-        if (kpi.id === "pendingApplications") return { ...kpi, value: pendingApps.toString(), description: pendingDesc };
-        if (kpi.id === "approvedPermits") return { ...kpi, value: approvedPermits.toString(), description: approvedDesc };
-        if (kpi.id === "rejectedApplications") return { ...kpi, value: rejectedApps.toString(), description: rejectedDesc };
-        return kpi;
+      if (kpi.id === "totalRevenue") return { ...kpi, value: `R ${(revenueValue / 1000000).toFixed(1)}Mil`, description: revenueDescription };
+      if (kpi.id === "pendingApplications") return { ...kpi, value: pendingApps.toString(), description: pendingDesc };
+      if (kpi.id === "approvedPermits") return { ...kpi, value: approvedPermits.toString(), description: approvedDesc };
+      if (kpi.id === "rejectedApplications") return { ...kpi, value: rejectedApps.toString(), description: rejectedDesc };
+      return kpi;
     }));
-//-----------
+
   }, [selectedTimeFilter]); // This useEffect seems to be for local data generation, not fetching from API. It should remain distinct from the KPI fetch useEffect.
 
   const handleAiActionClick = (actionType: string) => {
@@ -624,7 +493,7 @@ export default function DashboardPage() {
         description={`${formattedDate} at ${formattedTime}. Here's your operational overview.`}
         actions={
           <div className="flex flex-wrap items-center gap-2">
-             <Select value={selectedTimeFilter} onValueChange={setSelectedTimeFilter}> {/* Use selectedTimeFilter state */}
+            <Select value={selectedTimeFilter} onValueChange={setSelectedTimeFilter}> {/* Use selectedTimeFilter state */}
               <SelectTrigger className="w-auto h-9 text-sm" aria-label="Select time period for dashboard data">
                 <SelectValue placeholder="Select period" />
               </SelectTrigger>
@@ -652,26 +521,25 @@ export default function DashboardPage() {
         {isLoadingKpis ? (
           // Show skeleton loaders while loading
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-             {kpiData.map(kpi => (
-               <Card key={kpi.id}>
-                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                   <CardTitle className="text-sm font-medium">
-                     {kpi.title}
-                   </CardTitle>
-                   {/* You can add a loading spinner here */}
-                 </CardHeader>
-                 <CardContent>
-                   <div className="text-2xl font-bold">Fetching...</div>
-                   <p className="text-xs text-muted-foreground">
-                     Loading...
-                   </p>
-                 </CardContent>
-               </Card>
-             ))}
+            {kpiData.map(kpi => (
+              <Card key={kpi.id}>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">
+                    {kpi.title}
+                  </CardTitle>
+                  {/* You can add a loading spinner here */}
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">Fetching...</div>
+                  <p className="text-xs text-muted-foreground">
+                    Loading...
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
 
         ) : (
-          //---------------------------------------------------------
           // Render fetched KPI data
           kpiData.map(kpi => (
             <Card key={kpi.id}>
@@ -691,20 +559,6 @@ export default function DashboardPage() {
           ))
         )}
       </div>
-      {/*<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-6">
-        {kpiData.map((kpi) => (
-          <Card key={kpi.id} className="shadow-md hover:shadow-lg transition-shadow">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">{kpi.title}</CardTitle>
-              <kpi.icon className={`h-5 w-5 ${kpi.iconClassName || 'text-muted-foreground'}`} />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{kpi.value}</div>
-              <p className="text-xs text-muted-foreground">{kpi.description}</p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>*/}
 
       <div className="grid gap-6 md:grid-cols-2">
         <Card className="shadow-md">
@@ -749,7 +603,7 @@ export default function DashboardPage() {
               <CardTitle>Provincial Revenue Trend</CardTitle>
               <CardDescription>Revenue trend by province.</CardDescription>
             </div>
-             <DropdownMenu>
+            <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon" className="h-8 w-8">
                   <MoreHorizontal className="h-4 w-4" />
@@ -766,32 +620,32 @@ export default function DashboardPage() {
           <CardContent>
             <ChartContainer config={chartConfig} className="h-[300px] w-full">
               <BarChart data={currentProvincialRevenueData} margin={{ top: 5, right: 20, left: 20, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false}/>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="month" tickLine={false} axisLine={false} />
-                <YAxis tickLine={false} axisLine={false} tickFormatter={(value) => `R${value/1000}k`} />
+                <YAxis tickLine={false} axisLine={false} tickFormatter={(value) => `R${value / 1000}k`} />
                 <Tooltip content={<ChartTooltipContent />} />
                 <Legend content={<ChartLegendContent />} />
-                <Bar dataKey="GP" stackId="a" fill="var(--color-GP)" radius={[0,0,0,0]} barSize={10} />
-                <Bar dataKey="WC" stackId="a" fill="var(--color-WC)" radius={[0,0,0,0]} barSize={10} />
-                <Bar dataKey="KZN" stackId="a" fill="var(--color-KZN)" radius={[0,0,0,0]} barSize={10} />
-                <Bar dataKey="EC" stackId="a" fill="var(--color-EC)" radius={[0,0,0,0]} barSize={10} />
-                <Bar dataKey="LP" stackId="a" fill="var(--color-LP)" radius={[0,0,0,0]} barSize={10} />
-                <Bar dataKey="MP" stackId="a" fill="var(--color-MP)" radius={[0,0,0,0]} barSize={10} />
-                <Bar dataKey="NW" stackId="a" fill="var(--color-NW)" radius={[0,0,0,0]} barSize={10} />
-                <Bar dataKey="FS" stackId="a" fill="var(--color-FS)" radius={[0,0,0,0]} barSize={10} />
+                <Bar dataKey="GP" stackId="a" fill="var(--color-GP)" radius={[0, 0, 0, 0]} barSize={10} />
+                <Bar dataKey="WC" stackId="a" fill="var(--color-WC)" radius={[0, 0, 0, 0]} barSize={10} />
+                <Bar dataKey="KZN" stackId="a" fill="var(--color-KZN)" radius={[0, 0, 0, 0]} barSize={10} />
+                <Bar dataKey="EC" stackId="a" fill="var(--color-EC)" radius={[0, 0, 0, 0]} barSize={10} />
+                <Bar dataKey="LP" stackId="a" fill="var(--color-LP)" radius={[0, 0, 0, 0]} barSize={10} />
+                <Bar dataKey="MP" stackId="a" fill="var(--color-MP)" radius={[0, 0, 0, 0]} barSize={10} />
+                <Bar dataKey="NW" stackId="a" fill="var(--color-NW)" radius={[0, 0, 0, 0]} barSize={10} />
+                <Bar dataKey="FS" stackId="a" fill="var(--color-FS)" radius={[0, 0, 0, 0]} barSize={10} />
                 <Bar dataKey="NC" stackId="a" fill="var(--color-NC)" radius={[4, 4, 0, 0]} barSize={10} />
               </BarChart>
             </ChartContainer>
           </CardContent>
         </Card>
-        
+
         <Card className="shadow-md">
           <CardHeader className="flex flex-row items-center justify-between space-y-0">
             <div>
               <CardTitle>Application Type Distribution</CardTitle>
               <CardDescription>Distribution of applications by type.</CardDescription>
             </div>
-             <DropdownMenu>
+            <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon" className="h-8 w-8">
                   <MoreHorizontal className="h-4 w-4" />
@@ -810,9 +664,9 @@ export default function DashboardPage() {
               <PieChart>
                 <Tooltip content={<ChartTooltipContent nameKey="name" />} />
                 <Pie data={applicationTypeData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={100} labelLine={false} label={({ percent }) => `${(percent * 100).toFixed(0)}%`}>
-                    {applicationTypeData.map((entry, index) => (
-                        <Cell key={`cell-app-type-${index}`} fill={entry.fill} />
-                    ))}
+                  {applicationTypeData.map((entry, index) => (
+                    <Cell key={`cell-app-type-${index}`} fill={entry.fill} />
+                  ))}
                 </Pie>
                 <ChartLegend content={<ChartLegendContent nameKey="name" />} />
               </PieChart>
@@ -821,78 +675,78 @@ export default function DashboardPage() {
         </Card>
 
         <Card className="shadow-md">
-            <CardHeader>
-                <CardTitle className="flex items-center">
-                    <Icons.lightbulb className="mr-2 h-5 w-5 text-[hsl(var(--chart-4))]"/>
-                    Insights &amp; Actions
-                </CardTitle>
-                <CardDescription>Notifications, system suggestions, and AI-powered actions.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4 text-sm">
-                <div>
-                    <h4 className="font-semibold text-foreground mb-1.5">Notifications</h4>
-                    <ul className="space-y-3">
-                        {mockNotifications.map(notif => (
-                            <li key={notif.id} className="flex items-center justify-between space-x-2">
-                                <div className="flex items-start space-x-2 flex-1">
-                                    <notif.icon className="h-4 w-4 mt-0.5 text-muted-foreground flex-shrink-0" />
-                                    <div>
-                                        <p className="text-foreground">{notif.text}</p>
-                                        <p className="text-xs text-muted-foreground">{notif.time}</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-center space-x-1">
-                                  {notif.actionLabel && notif.actionHref && (
-                                      <Button variant="outline" size="sm" asChild className="h-7 text-xs px-2 self-start">
-                                          <Link href={notif.actionHref}>
-                                              {notif.actionLabel}
-                                              <Icons.arrowRight className="ml-1.5 h-3 w-3" />
-                                          </Link>
-                                      </Button>
-                                  )}
-                                  {notif.actionHref && notif.actionHref.includes('/applications/review') && (
-                                    <Button
-                                        variant="outline"
-                                        size="sm"
-                                        className="h-7 text-xs px-2 self-start ml-2"
-                                        onClick={() => handleAiActionClick(`ai_call_applicant_review_${notif.id}`)}
-                                    >
-                                        <Icons.sparkles className="mr-1 h-3 w-3 text-accent"/>
-                                        Call with AI
-                                    </Button>
-                                  )}
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-                <Separator/>
-                <div>
-                    <h4 className="font-semibold text-foreground mb-1.5">Suggested Insights</h4>
-                    <ul className="space-y-3">
-                        {mockSuggestedInsights.map((insight, index) => (
-                            <li key={index} className="flex items-center justify-between space-x-2">
-                               <div className="flex items-start space-x-2 flex-1">
-                                    <Icons.sparkles className="h-4 w-4 mt-0.5 text-accent flex-shrink-0" />
-                                    <p className="text-muted-foreground flex-1">{insight.text}</p>
-                               </div>
-                                {insight.actionLabel && (
-                                    <Button
-                                        variant="outline"
-                                        size="sm"
-                                        className="h-7 text-xs px-2 self-start"
-                                        onClick={() => insight.actionType ? handleAiActionClick(insight.actionType) : (insight.actionHref ? window.open(insight.actionHref, '_blank') : undefined)}
-                                    >
-                                        {insight.actionLabel}
-                                        {insight.actionType && <Icons.sparkles className="ml-1.5 h-3 w-3 text-accent" />}
-                                        {insight.actionHref && <Icons.externalLink className="ml-1.5 h-3 w-3" />}
-                                    </Button>
-                                )}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </CardContent>
+          <CardHeader>
+            <CardTitle className="flex items-center">
+              <Icons.lightbulb className="mr-2 h-5 w-5 text-[hsl(var(--chart-4))]" />
+              Insights &amp; Actions
+            </CardTitle>
+            <CardDescription>Notifications, system suggestions, and AI-powered actions.</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4 text-sm">
+            <div>
+              <h4 className="font-semibold text-foreground mb-1.5">Notifications</h4>
+              <ul className="space-y-3">
+                {mockNotifications.map(notif => (
+                  <li key={notif.id} className="flex items-center justify-between space-x-2">
+                    <div className="flex items-start space-x-2 flex-1">
+                      <notif.icon className="h-4 w-4 mt-0.5 text-muted-foreground flex-shrink-0" />
+                      <div>
+                        <p className="text-foreground">{notif.text}</p>
+                        <p className="text-xs text-muted-foreground">{notif.time}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      {notif.actionLabel && notif.actionHref && (
+                        <Button variant="outline" size="sm" asChild className="h-7 text-xs px-2 self-start">
+                          <Link href={notif.actionHref}>
+                            {notif.actionLabel}
+                            <Icons.arrowRight className="ml-1.5 h-3 w-3" />
+                          </Link>
+                        </Button>
+                      )}
+                      {notif.actionHref && notif.actionHref.includes('/applications/review') && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="h-7 text-xs px-2 self-start ml-2"
+                          onClick={() => handleAiActionClick(`ai_call_applicant_review_${notif.id}`)}
+                        >
+                          <Icons.sparkles className="mr-1 h-3 w-3 text-accent" />
+                          Call with AI
+                        </Button>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <Separator />
+            <div>
+              <h4 className="font-semibold text-foreground mb-1.5">Suggested Insights</h4>
+              <ul className="space-y-3">
+                {mockSuggestedInsights.map((insight, index) => (
+                  <li key={index} className="flex items-center justify-between space-x-2">
+                    <div className="flex items-start space-x-2 flex-1">
+                      <Icons.sparkles className="h-4 w-4 mt-0.5 text-accent flex-shrink-0" />
+                      <p className="text-muted-foreground flex-1">{insight.text}</p>
+                    </div>
+                    {insight.actionLabel && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="h-7 text-xs px-2 self-start"
+                        onClick={() => insight.actionType ? handleAiActionClick(insight.actionType) : (insight.actionHref ? window.open(insight.actionHref, '_blank') : undefined)}
+                      >
+                        {insight.actionLabel}
+                        {insight.actionType && <Icons.sparkles className="ml-1.5 h-3 w-3 text-accent" />}
+                        {insight.actionHref && <Icons.externalLink className="ml-1.5 h-3 w-3" />}
+                      </Button>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </CardContent>
         </Card>
 
         <Card className="shadow-md md:col-span-2">
@@ -901,9 +755,9 @@ export default function DashboardPage() {
             <CardDescription>A quick view of the latest permit applications.</CardDescription>
           </CardHeader>
           <CardContent className="p-0">
- {isLoadingRecentApplications ? (
+            {isLoadingRecentApplications ? (
               <div className="p-4 text-center">Loading recent applications...</div>
- ) : recentApplications.length > 0 ? (
+            ) : recentApplications.length > 0 ? (
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
@@ -958,13 +812,13 @@ export default function DashboardPage() {
                   </TableBody>
                 </Table>
               </div>
- ) : (
+            ) : (
               <div className="p-4 text-center text-muted-foreground">No recent applications found.</div>
- )}
+            )}
             <div className="p-4 text-right border-t">
-                <Button variant="link" size="sm" asChild>
-                    <Link href="/applications">View All</Link>
-                </Button>
+              <Button variant="link" size="sm" asChild>
+                <Link href="/applications">View All</Link>
+              </Button>
             </div>
           </CardContent>
         </Card>

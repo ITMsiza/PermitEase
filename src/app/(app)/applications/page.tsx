@@ -52,11 +52,11 @@ type VehicleTypesFilter = {
 };
 
 const vehicleTypesFilter: VehicleTypesFilter[] = [
-  {  vehicleType: 'Sedan' },
-  {  vehicleType: 'Minibus'},
-  {  vehicleType: 'Shuttle'},
-  { vehicleType: 'Truck'},
-  { vehicleType: 'Bus'},
+  { vehicleType: 'Sedan' },
+  { vehicleType: 'Minibus' },
+  { vehicleType: 'Shuttle' },
+  { vehicleType: 'Truck' },
+  { vehicleType: 'Bus' },
 ];
 
 const formatCurrency = (amount: number) => {
@@ -102,7 +102,7 @@ export default function PermitsPage() {
           throw new Error('Failed to fetch applications');
         }
         const data: Application[] = await response.json();
-    
+
         setApplications(data);
       } catch (error) {
         console.error("Error fetching recent applications:", error);
@@ -213,7 +213,7 @@ export default function PermitsPage() {
                 </TableCell>
               </TableRow>
             ))}
-             {filteredApplications.length === 0 && (
+            {filteredApplications.length === 0 && (
               <TableRow>
                 <TableCell colSpan={7} className="h-24 text-center">
                   No applications found.
@@ -232,4 +232,3 @@ export default function PermitsPage() {
   );
 }
 
-    

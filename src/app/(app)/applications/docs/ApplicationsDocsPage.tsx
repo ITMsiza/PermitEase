@@ -5,13 +5,10 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Breadcrumb } from "@/components/breadcrumb";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Button } from "@/components/ui/button"; // Assuming Button is used somewhere
+import { Button } from "@/components/ui/button"; 
 
 interface Application {
   applicationIdDisplay: string;
-  // Add other properties you might want to display initially, e.g.:
-  // applicationType: string;
-  // submittedAt: string;
 }
 
 export default function ApplicationsDocsPage() {
@@ -64,14 +61,12 @@ export default function ApplicationsDocsPage() {
     fetchPendingApplications(); // Fetch only pending applications
     fetchApplications();
   }, []); // Fetch applications only once on component mount
-  //--------------------------------
   
   useEffect(() => {
     if (applicationId) {
       const fetchApplicationData = async () => {
         try {
           setLoadingSelected(true); // Set loading state for the specific application data
-          // setLoading(true);
           const response = await fetch(`/api/get-application-data?applicationId=${applicationId}`);
           if (!response.ok) {
             throw new Error(`Error fetching application data: ${response.statusText}`);
@@ -83,7 +78,6 @@ export default function ApplicationsDocsPage() {
           console.error(`Error fetching data for application ${applicationId}:`, err);
           setSelectedApplicationData(null); // Clear data if fetch fails
         } finally {          setLoadingSelected(false); // Unset loading
-          // setLoading(false); // Unset loading if used
         }
       };
 

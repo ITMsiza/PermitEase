@@ -16,50 +16,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { auth } from "@/lib/firebase"; // Update path if necessary
 
-/*interface ApplicationFormData {
-  applicationIdDisplay: string | null;
-  applicationType: string;
-  amendmentType?: string;
-  serviceType: string;
-  applyingAs: 'individual' | 'company' | '';
-  appCompany?: string; // Affiliated With
-  identificationType?: 'sa_id' | 'sa_passport' | 'foreign_passport' | '';
-  fullName?: string;
-  saIdNumber?: string;
-  saIdDocumentFile?: File | null;
-  saPassportNumber?: string;
-  saPassportDocumentFile?: File | null;
-  foreignPassportNumber?: string;
-  foreignPassportDocumentFile?: File | null;
-  driversLicenceNumber?: string;
-  driversLicenceFile?: File | null;
-  companyName?: string;
-  companyRegistrationNumber?: string;
-  companyRegistrationDocumentFile?: File | null;
-  tradeName?: string;
-  businessType?: string;
-  companyMemorandumOfUnderstanding?: boolean;
-  companyMemorandumOfUnderstandingFile?: File | null;
-  companyCertificateOfIncorporation?: boolean;
-  companyCertificateOfIncorporationFile?: File | null;
-  companyFoundingStatement?: boolean;
-  companyFoundingStatementFile?: File | null;
-  incomeTaxNumber?: string;
-  taxClearanceCertificateFile?: File | null;
-  postalAddressStreet?: string;
-  postalAddressSuburb?: string;
-  postalAddressCity?: string;
-  postalCode?: string;
-  domiciliumCitandi?: string;
-  isStreetAddressSameAsPostal?: boolean;
-  streetAddressStreet?: string;
-  streetAddressSuburb?: string;
-  streetAddressCity?: string;
-  streetPostalCode?: string;
-  telephoneCode?: string;
-  telephoneNumber?: string;
-  emailAddress?: string;
-}*/
 
 interface ApplicationFormData {
   // ... (Your existing and new fields here)
@@ -108,12 +64,6 @@ interface ApplicationFormData {
     streetAddressCity?: string;
     streetPostalCode?: string;
 
-    // --- NEW FIELDS (for the new sections) ---
-
-    /*/ Application Type (using new names to avoid conflict if needed, adjust as required)
-    newApplicationTypeSelection: string;
-    newPermitSubTypeSelection: string;*/
-
     // Contact Information (new fields not covered by existing address)
 
     telephoneCode?: string;
@@ -131,58 +81,11 @@ interface ApplicationFormData {
     vehicleLicenseDiscFile: File | null;
 }
 
-
-/*const initialFormData: ApplicationFormData = {
-  applicationIdDisplay: null,
-  applicationType: '',
-  serviceType: '',
-  amendmentType: '',
-  applyingAs: '',
-  appCompany: undefined,
-  identificationType: '',
-  fullName: undefined,
-  saIdNumber: undefined,
-  saIdDocumentFile: null,
-  saPassportNumber: undefined,
-  saPassportDocumentFile: null,
-  foreignPassportNumber: undefined,
-  foreignPassportDocumentFile: null,
-  driversLicenceNumber: undefined,
-  driversLicenceFile: null,
-  companyName: undefined,
-  companyRegistrationNumber: undefined,
-  companyRegistrationDocumentFile: null,
-  tradeName: undefined,
-  businessType: undefined,
-  companyMemorandumOfUnderstanding: false,
-  companyMemorandumOfUnderstandingFile: null,
-  companyCertificateOfIncorporation: false,
-  companyCertificateOfIncorporationFile: null,
-  companyFoundingStatement: false,
-  companyFoundingStatementFile: null,
-  incomeTaxNumber: undefined,
-  taxClearanceCertificateFile: null,
-  isStreetAddressSameAsPostal: false,
-  postalAddressStreet: '',
-  postalAddressSuburb: '',
-  postalAddressCity: '',
-  postalCode: '',
-  domiciliumCitandi: '',
-  streetAddressStreet: '',
-  streetAddressSuburb: '',
-  streetAddressCity: '',
-  streetPostalCode: '',
-  telephoneCode: '+27',
-  telephoneNumber: '',
-  emailAddress: '',
-};*/
-
 const initialFormData: ApplicationFormData = {
   applicationIdDisplay: null,
   applicationType: '',
   amendmentType: '',
   serviceType: '',
-
   applyingAs: '',
   appCompany: undefined,
 
@@ -226,12 +129,6 @@ const initialFormData: ApplicationFormData = {
   streetAddressSuburb: '',
   streetAddressCity: '',
   streetPostalCode: '',
-
-  // --- NEW FIELDS (for new sections) ---
-
-  /*/ Application Type
-  newApplicationTypeSelection: '',
-  newPermitSubTypeSelection: '',*/
 
   // Contact Information
   telephoneCode: '+27',
@@ -608,52 +505,6 @@ export default function NewPermitPage() {
       setFormData(prev => ({ ...prev, applicationIdDisplay: newApplicationId }));
     }
   
-    /*const applicationData: ApplicationFormData = {
-      ...(formData as any),
-      applicationIdDisplay: newApplicationId || null,
-      applicationType: formData.applicationType,
-      serviceType: formData.serviceType,
-      applyingAs: formData.applyingAs,
-      amendmentType: formData.amendmentType || null,
-      appCompany: formData.appCompany || null,
-      identificationType: formData.identificationType || null,
-      fullName: formData.fullName || null,
-      saIdNumber: formData.saIdNumber || null,
-      saIdDocumentFile: base64Files[0],
-      saPassportNumber: formData.saPassportNumber || null,
-      saPassportDocumentFile: base64Files[1],
-      foreignPassportNumber: formData.foreignPassportNumber || null,
-      foreignPassportDocumentFile: base64Files[2],
-      driversLicenceNumber: formData.driversLicenceNumber || null,
-      driversLicenceFile: base64Files[3],
-      companyName: formData.companyName || null,
-      companyRegistrationNumber: formData.companyRegistrationNumber || null,
-      companyRegistrationDocumentFile: base64Files[4],
-      tradeName: formData.tradeName || null,
-      businessType: formData.businessType || null,
-      companyMemorandumOfUnderstanding: formData.companyMemorandumOfUnderstanding || false,
-      companyMemorandumOfUnderstandingFile: base64Files[5],
-      companyCertificateOfIncorporation: formData.companyCertificateOfIncorporation || false,
-      companyCertificateOfIncorporationFile: base64Files[6],
-      companyFoundingStatement: formData.companyFoundingStatement || false,
-      companyFoundingStatementFile: base64Files[7],
-      incomeTaxNumber: formData.incomeTaxNumber || null,
-      taxClearanceCertificateFile: base64Files[8],
-      postalAddressStreet: formData.postalAddressStreet || '',
-      postalAddressSuburb: formData.postalAddressSuburb || '',
-      postalAddressCity: formData.postalAddressCity || '',
-      postalCode: formData.postalCode || '',
-      domiciliumCitandi: formData.domiciliumCitandi || '',
-      isStreetAddressSameAsPostal: formData.isStreetAddressSameAsPostal || false,
-      streetAddressStreet: formData.streetAddressStreet || '',
-      streetAddressSuburb: formData.streetAddressSuburb || '',
-      streetAddressCity: formData.streetAddressCity || '',
-      streetPostalCode: formData.streetPostalCode || '',
-      telephoneCode: formData.telephoneCode || '+27',
-      telephoneNumber: formData.telephoneNumber || '',
-      emailAddress: formData.emailAddress || '',
-    };*/
-
     const applicationData: ApplicationFormData = {
       ...(formData as any),
     
@@ -706,10 +557,6 @@ export default function NewPermitPage() {
       streetAddressCity: formData.streetAddressCity || '',
       streetPostalCode: formData.streetPostalCode || '',
     
-      /*/ --- Application Type (New Fields) ---
-      newApplicationTypeSelection: formData.newApplicationTypeSelection || '',
-      newPermitSubTypeSelection: formData.newPermitSubTypeSelection || '',*/
-    
       // --- Contact Info (Updated Field Names) ---
       telephoneCode: formData.telephoneCode || '+27',
       telephoneNumber: formData.telephoneNumber || '',
@@ -758,235 +605,8 @@ export default function NewPermitPage() {
     } catch (error) {
       console.error('An error occurred during submission:', error);
     }
-
-     /*/---------------------------------------Code for UI part----------------------
-     if (!formData.applicationIdDisplay) {
-      const newApplicationId = `PW-${String(Date.now()).slice(-4)}-${Math.floor(Math.random() * 100)}`;
-      applicationData.applicationIdDisplay = newApplicationId;
-      setFormData(prev => ({ ...prev, applicationIdDisplay: newApplicationId })); // Update local state for display
-    }*/
   };
   
-
-
-
-
-
-  /*const handleSubmit = async () => {
-    const fileFields = [
-      'saIdDocumentFile',
-      'saPassportDocumentFile',
-      'foreignPassportDocumentFile',
-      'driversLicenceFile',
-      'companyRegistrationDocumentFile',
-      'companyMemorandumOfUnderstandingFile',
-      'companyCertificateOfIncorporationFile',
-      'companyFoundingStatementFile',
-      'taxClearanceCertificateFile',
-    ] as const;
-  
-    // Convert files to base64
-    const filePromises = fileFields.map(field => fileToBase64(formData[field] || null));
-    const base64Files = await Promise.all(filePromises);
-  
-    // Optional: Set generated ID early if missing
-    let newApplicationId = formData.applicationIdDisplay;
-    if (!newApplicationId) {
-      newApplicationId = `PW-${String(Date.now()).slice(-4)}-${Math.floor(Math.random() * 100)}`;
-      setFormData(prev => ({ ...prev, applicationIdDisplay: newApplicationId }));
-    }
-  
-    // Construct the final applicationData object
-    const applicationData: ApplicationFormData = {
-      ...(formData as any), // fallback
-      applicationIdDisplay: newApplicationId || null,
-      applicationType: formData.applicationType,
-      serviceType: formData.serviceType,
-      applyingAs: formData.applyingAs,
-      amendmentType: formData.amendmentType || null,
-      appCompany: formData.appCompany || null,
-      identificationType: formData.identificationType || null,
-      fullName: formData.fullName || null,
-      saIdNumber: formData.saIdNumber || null,
-      saIdDocumentFile: base64Files[0],
-      saPassportNumber: formData.saPassportNumber || null,
-      saPassportDocumentFile: base64Files[1],
-      foreignPassportNumber: formData.foreignPassportNumber || null,
-      foreignPassportDocumentFile: base64Files[2],
-      driversLicenceNumber: formData.driversLicenceNumber || null,
-      driversLicenceFile: base64Files[3],
-      companyName: formData.companyName || null,
-      companyRegistrationNumber: formData.companyRegistrationNumber || null,
-      companyRegistrationDocumentFile: base64Files[4],
-      tradeName: formData.tradeName || null,
-      businessType: formData.businessType || null,
-      companyMemorandumOfUnderstanding: formData.companyMemorandumOfUnderstanding || false,
-      companyMemorandumOfUnderstandingFile: base64Files[5],
-      companyCertificateOfIncorporation: formData.companyCertificateOfIncorporation || false,
-      companyCertificateOfIncorporationFile: base64Files[6],
-      companyFoundingStatement: formData.companyFoundingStatement || false,
-      companyFoundingStatementFile: base64Files[7],
-      incomeTaxNumber: formData.incomeTaxNumber || null,
-      taxClearanceCertificateFile: base64Files[8],
-      postalAddressStreet: formData.postalAddressStreet || '',
-      postalAddressSuburb: formData.postalAddressSuburb || '',
-      postalAddressCity: formData.postalAddressCity || '',
-      postalCode: formData.postalCode || '',
-      domiciliumCitandi: formData.domiciliumCitandi || '',
-      isStreetAddressSameAsPostal: formData.isStreetAddressSameAsPostal || false,
-      streetAddressStreet: formData.streetAddressStreet || '',
-      streetAddressSuburb: formData.streetAddressSuburb || '',
-      streetAddressCity: formData.streetAddressCity || '',
-      streetPostalCode: formData.streetPostalCode || '',
-      telephoneCode: formData.telephoneCode || '+27',
-      telephoneNumber: formData.telephoneNumber || '',
-      emailAddress: formData.emailAddress || '',
-    };
-  
-    try {
-      // Get Firebase token
-      const user = auth.currentUser;
-      if (!user) {
-        console.error("User not authenticated.");
-        return;
-      }
-  
-      const token = await user.getIdToken();
-  
-      // Submit to API route
-      const response = await fetch('/api/submit-application', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify(applicationData),
-      });
-  
-      if (!response.ok) {
-        const contentType = response.headers.get("content-type");
-        const errorText = contentType?.includes("application/json")
-          ? await response.json()
-          : await response.text();
-        console.error("Submission failed:", errorText);
-        return;
-      }
-  
-      const result = await response.json();
-      console.log('Submission successful:', result);
-      // Optionally reset form or show a success toast
-  
-    } catch (error) {
-      console.error('An error occurred during submission:', error);
-    }
-  };*/
-  
-  //-------------------------------------------
-
-  /*const handleSubmit = async () => {
-
-    // Collect all form data
-    const applicationData: ApplicationFormData = {
-      ...(formData as any), // Type assertion might be needed depending on exact ApplicationFormData type
-      // Ensure optional fields that are empty strings or null are explicitly included
-      applicationIdDisplay: formData.applicationIdDisplay || null,
-      applicationType: formData.applicationType,
-      serviceType: formData.serviceType,
-      applyingAs: formData.applyingAs,
-      amendmentType: formData.amendmentType || null, // Use null for optional string fields
-      appCompany: formData.appCompany || null, // Use null for optional string fields
-      identificationType: formData.identificationType || null, // Use null for optional string fields
-      fullName: formData.fullName || null, // Use null for optional string fields
-      saIdNumber: formData.saIdNumber || null, // Use null for optional string fields
-      saIdDocumentFile: formData.saIdDocumentFile || null, // Keep as null for File or null
-      saPassportNumber: formData.saPassportNumber || null, // Use null for optional string fields
-      saPassportDocumentFile: formData.saPassportDocumentFile || null, // Keep as null for File or null
-      foreignPassportNumber: formData.foreignPassportNumber || null, // Use null for optional string fields
-      foreignPassportDocumentFile: formData.foreignPassportDocumentFile || null, // Keep as null for File or null
-      driversLicenceNumber: formData.driversLicenceNumber || null, // Use null for optional string fields
-      driversLicenceFile: formData.driversLicenceFile || null, // Keep as null for File or null
-      companyName: formData.companyName || null, // Use null for optional string fields
-      companyRegistrationNumber: formData.companyRegistrationNumber || null, // Use null for optional string fields
-      companyRegistrationDocumentFile: formData.companyRegistrationDocumentFile || null, // Keep as null for File or null
-      tradeName: formData.tradeName || null, // Use null for optional string fields
-      businessType: formData.businessType || null, // Use null for optional string fields
- companyMemorandumOfUnderstanding: formData.companyMemorandumOfUnderstanding || false, // Use false for optional boolean fields
-      companyMemorandumOfUnderstandingFile: formData.companyMemorandumOfUnderstandingFile || null, // Keep as null for File or null
- companyCertificateOfIncorporation: formData.companyCertificateOfIncorporation || false, // Use false for optional boolean fields
-      companyCertificateOfIncorporationFile: formData.companyCertificateOfIncorporationFile || null, // Keep as null for File or null
- companyFoundingStatement: formData.companyFoundingStatement || false, // Use false for optional boolean fields
-      companyFoundingStatementFile: formData.companyFoundingStatementFile || null, // Keep as null for File or null
-      incomeTaxNumber: formData.incomeTaxNumber || null, // Use null for optional string fields
-      taxClearanceCertificateFile: formData.taxClearanceCertificateFile || null, // Keep as null for File or null
-      postalAddressStreet: formData.postalAddressStreet || '', // Use empty string for optional string fields
-      postalAddressSuburb: formData.postalAddressSuburb || '', // Use empty string for optional string fields
-      postalAddressCity: formData.postalAddressCity || '', // Use empty string for optional string fields
-      postalCode: formData.postalCode || '', // Use empty string for optional string fields
-      domiciliumCitandi: formData.domiciliumCitandi || '', // Use empty string for optional string fields
- isStreetAddressSameAsPostal: formData.isStreetAddressSameAsPostal || false, // Use false for optional boolean fields
-      streetAddressStreet: formData.streetAddressStreet || '', // Use empty string for optional string fields
-      streetAddressSuburb: formData.streetAddressSuburb || '', // Use empty string for optional string fields
-      streetAddressCity: formData.streetAddressCity || '', // Use empty string for optional string fields
-      streetPostalCode: formData.streetPostalCode || '', // Use empty string for optional string fields
-      telephoneCode: formData.telephoneCode || '+27', // Use default or empty string for optional string fields
-      telephoneNumber: formData.telephoneNumber || '', // Use empty string for optional string fields
-      emailAddress: formData.emailAddress || '', // Use empty string for optional string fields
-    };
-
-    try {
-        // Get the user's token
-        const user = auth.currentUser;
-        
-        if (!user) {
-          // Handle the case where the user is not authenticated
-          console.error("User not authenticated.");
-          return;
-        }
-        const token = await user.getIdToken();
-    
-        // Send the form data and token to your API endpoint
-        const response = await fetch('/api/submit-application', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
-          },
-          body: JSON.stringify(applicationData),
-        });
-    
-        if (!response.ok) {
-            const contentType = response.headers.get("content-type");
-            const errorText = contentType?.includes("application/json")
-              ? await response.json()
-              : await response.text(); // fallback for HTML error
-          
-            console.error("Submission failed:", errorText);
-            return;
-          }
-          
-    
-        // Handle successful submission
-        const result = await response.json();
-        console.log('Submission successful:', result);
-        // Optionally, redirect the user or show a success message
-    
-      } catch (error) {
-        console.error('An error occurred during submission:', error);
-        // Optionally, show an error message to the user
-      }
-
-    //---------------------------------------Code for UI part----------------------
-    if (!formData.applicationIdDisplay) {
-      const newApplicationId = `PW-${String(Date.now()).slice(-4)}-${Math.floor(Math.random() * 100)}`;
-      applicationData.applicationIdDisplay = newApplicationId;
-      setFormData(prev => ({ ...prev, applicationIdDisplay: newApplicationId })); // Update local state for display
-    }
-
-    
-  };*/
-
-  
-
   const isLastDisplayTab = activeTabId === formSectionsConfig[formSectionsConfig.length - 1].id;
 
   const breadcrumbItems = [
@@ -1689,33 +1309,6 @@ export default function NewPermitPage() {
       />
     </div>
 
-    {/* Engine Number /}
-    <div className="space-y-2">
-      <Label htmlFor="vehicleEngine" className="text-base font-semibold">
-        Engine Number <span className="text-destructive">*</span>
-      </Label>
-      <Input
-        id="vehicleEngine"
-        value={formData.vehicleEngine || ""}
-        onChange={(e) => handleInputChange("vehicleEngine", e.target.value)}
-        placeholder="Enter engine number"
-      />
-    </div>*/}
-
-    {/* Passenger Capacity /}
-    <div className="space-y-2">
-      <Label htmlFor="vehicleCapacity" className="text-base font-semibold">
-        Passenger Capacity <span className="text-destructive">*</span>
-      </Label>
-      <Input
-        id="vehicleCapacity"
-        type="number"
-        value={formData.vehicleCapacity || ""}
-        onChange={(e) => handleInputChange("vehicleCapacity", e.target.value)}
-        placeholder="Enter passenger capacity"
-      />
-    </div>*/}
-
     {/* Vehicle Ownership Document */}
     <div className="space-y-2">
       <Label htmlFor="vehicleOwnershipDocumentFile" className="text-base font-semibold">
@@ -1748,134 +1341,6 @@ export default function NewPermitPage() {
 </CardContent>
 </Card>
 </TabsContent>
-
-
-        {/*<TabsContent value="vehicleData">
-  <Card>
-    <CardHeader>
-      <CardTitle>Vehicle Data</CardTitle>
-      <CardDescription>
-        Provide details about the vehicle(s) to be used for the service.
-      </CardDescription>
-    </CardHeader>
-
-    <CardContent className="p-4">
-      <div className="mt-4 space-y-4">
-
-        {/* Vehicle Registration Number /}
-        <div className="space-y-2">
-          <Label htmlFor="vehicle-registration" className="text-base font-semibold">
-            Vehicle Registration Number <span className="text-destructive">*</span>
-          </Label>
-          <Input id="vehicle-registration" placeholder="Enter vehicle registration" />
-        </div>
-
-        {/* Vehicle Type /}
-        <div className="space-y-2">
-          <Label htmlFor="vehicle-type" className="text-base font-semibold">
-            Vehicle Type <span className="text-destructive">*</span>
-          </Label>
-          <select
-            id="vehicle-type"
-            className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-          >
-            <option value="">Select vehicle type</option>
-            <option value="sedan">Sedan</option>
-            <option value="minibus">Minibus</option>
-            <option value="shuttle">Shuttle</option>
-            <option value="bus">Bus</option>
-            <option value="bakkie">Bakkie</option>
-          </select>
-        </div>
-
-        {/* Vehicle Make /}
-        <div className="space-y-2">
-          <Label htmlFor="vehicle-make" className="text-base font-semibold">
-            Vehicle Make <span className="text-destructive">*</span>
-          </Label>
-          <Input id="vehicle-make" placeholder="e.g., Toyota, Mercedes-Benz" />
-        </div>
-
-        {/* Vehicle Model /}
-        <div className="space-y-2">
-          <Label htmlFor="vehicle-model" className="text-base font-semibold">
-            Vehicle Model <span className="text-destructive">*</span>
-          </Label>
-          <Input id="vehicle-model" placeholder="e.g., Quantum, Sprinter" />
-        </div>
-
-        {/* Year of Manufacture /}
-        <div className="space-y-2">
-          <Label htmlFor="vehicle-year" className="text-base font-semibold">
-            Year of Manufacture <span className="text-destructive">*</span>
-          </Label>
-          <Input id="vehicle-year" type="number" placeholder="Enter year" />
-        </div>
-
-        {/* VIN / Chassis Number /}
-        <div className="space-y-2">
-          <Label htmlFor="vehicle-vin" className="text-base font-semibold">
-            VIN / Chassis Number <span className="text-destructive">*</span>
-          </Label>
-          <Input id="vehicle-vin" placeholder="Enter VIN / Chassis Number" />
-        </div>
-
-        {/* Engine Number /}
-        <div className="space-y-2">
-          <Label htmlFor="vehicle-engine" className="text-base font-semibold">
-            Engine Number <span className="text-destructive">*</span>
-          </Label>
-          <Input id="vehicle-engine" placeholder="Enter engine number" />
-        </div>
-
-        {/* Passenger Capacity /}
-        <div className="space-y-2">
-          <Label htmlFor="vehicle-capacity" className="text-base font-semibold">
-            Passenger Capacity <span className="text-destructive">*</span>
-          </Label>
-          <Input id="vehicle-capacity" type="number" placeholder="Enter passenger capacity" />
-        </div>
-
-        {/* Certificate of Roadworthiness /}
-        <div className="space-y-2">
-          <Label htmlFor="vehicle-roadworthy" className="text-base font-semibold">
-            Certificate of Roadworthiness <span className="text-destructive">*</span>
-          </Label>
-          <Input id="vehicle-roadworthy" type="file" />
-        </div>
-
-        {/* Vehicle License Disc /}
-        <div className="space-y-2">
-          <Label htmlFor="vehicle-disc" className="text-base font-semibold">
-            Vehicle License Disc <span className="text-destructive">*</span>
-          </Label>
-          <Input id="vehicle-disc" type="file" />
-        </div>
-
-      </div>
-    </CardContent>
-  </Card>
-</TabsContent>*/}
-
-
-        {/*<TabsContent value="vehicleData">
-             <Card>
-              <CardHeader>
-                <CardTitle>Vehicle Data</CardTitle>
-                <CardDescription>Provide details about the vehicle(s) to be used for the service.</CardDescription>
-              </CardHeader>
-              <CardContent className="p-4">
-                <p className="text-muted-foreground">Content for Vehicle Data will be implemented here. This includes vehicle registration, type, capacity, etc.</p>
-                 <div className="mt-4 space-y-4">
-                    <div className="space-y-2">
-                        <Label htmlFor="field-vehicle-1" className="text-base font-semibold">Vehicle Registration Number <span className="text-destructive">*</span></Label>
-                        <Input id="field-vehicle-1" placeholder="Enter vehicle registration" />
-                    </div>
-                </div>
-              </CardContent>
-            </Card>
-        </TabsContent>*/}
-
         <TabsContent value="audit">
             <Card>
                 <CardHeader>
@@ -1966,7 +1431,6 @@ export default function NewPermitPage() {
         <div className="flex items-center space-x-2">
           {isLastDisplayTab ? (
             <Button onClick={handleSubmit} className="bg-green-600 hover:bg-green-700">
-                {/*disabled={!isCurrentTabValid || !isApplicantDataValid(formData) || !isAddressInfoValid(formData) }*/}
               <Icons.check className="mr-2 h-4 w-4" />
               Submit Application
             </Button>

@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-/*import { initializeApp, applicationDefault, getApps } from 'firebase-admin/app';
-import { getFirestore } from 'firebase-admin/firestore';*/
 import { db } from '@/lib/firebaseAdmin';
 // Initialize Firebase Admin SDK if not already initialized
 
